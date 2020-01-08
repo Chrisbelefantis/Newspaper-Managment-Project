@@ -283,6 +283,7 @@ public class LoginGui extends javax.swing.JFrame {
                 
                 if(se.next())
                 {
+                    
                     email =se.getString("Email");
                     Dbpassword = se.getString("password");
                 }
