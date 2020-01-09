@@ -196,7 +196,7 @@ public class updateCategory extends javax.swing.JFrame {
                 if(rs.next())
                 {
                 stmt.executeUpdate("update article set category='"+rs.getString(1)+"' where title='"+title+"'");
-                stmt.executeUpdate("update article set state='applied' where state='rejected'");
+                stmt.executeUpdate("update article set state='applied' where title='"+title+"'");
                 savedLabel.setText("The category has been changed");
                 }
                 

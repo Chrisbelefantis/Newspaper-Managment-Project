@@ -221,7 +221,7 @@ public class journalistGui extends javax.swing.JFrame {
 "                                    from article" +
 "                                    inner join submits on article.path = submits.submittedArticle" +
 "                                    where journalistSubEmail = '"+journalistEmail+"' and state <> 'accepted'" +
-"                                     order by state,path asc;");
+"                                     order by state,path asc");
                            
              
              while(rs.next())

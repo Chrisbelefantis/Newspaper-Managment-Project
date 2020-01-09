@@ -46,7 +46,8 @@ public class ColumnistGui extends javax.swing.JFrame {
          try{
        
               stmt=con.createStatement();
-              rs = stmt.executeQuery("select state,title,magazine,length,category,journalistSubEmail from article inner join submits on path = submittedArticle order by title");
+              rs = stmt.executeQuery("select state,title,magazine,length,category,journalistSubEmail from article inner join submits on path = submittedArticle "
+                      + "order by state,title");
               
               
            
@@ -471,25 +472,7 @@ public class ColumnistGui extends javax.swing.JFrame {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
 
-       // int row = jTable2.getSelectedRow();
-
-       // if(row!=-1){
-
-         //   String selectedTitle = jTable2.getModel().getValueAt(row, 1).toString();
-           // updateTitle titleGui = new updateTitle(selectedTitle,con);
-           // titleGui.setVisible(true);
-       // }
-      ///  else{
-
-           /// JOptionPane.showMessageDialog(null,
-//                "Please select one article",
-//                "Cannot update",
-//                JOptionPane.WARNING_MESSAGE);
-     
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-       int row = jTable1.getSelectedRow();
+           int row = jTable1.getSelectedRow();
         
         if(row!=-1){
             
@@ -501,7 +484,65 @@ public class ColumnistGui extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, 
                                    "Please select one article", 
-                                   "Cannot update", 
+                                   "Cannot delete", 
+                                   JOptionPane.WARNING_MESSAGE);
+        }
+        
+     
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        
+           int row = jTable1.getSelectedRow();
+           String selectedTitle = jTable1.getModel().getValueAt(row, 1).toString();
+        
+        if(row!=-1){
+            
+            Statement stmt = null;
+             
+            try{
+                stmt = con.createStatement();
+          
+                stmt.executeUpdate("update article set state = 'rejected' where title = '"+selectedTitle+"' ");
+                
+                 JOptionPane.showMessageDialog(null, 
+                                   "The article has been deleted", 
+                                   "Article Deleted", 
+                                   JOptionPane.INFORMATION_MESSAGE);
+                 
+                 initializeTab1();
+            
+                
+            }
+            catch(SQLException e){
+                System.out.println(e.getMessage());
+
+            }
+            finally{
+
+                try{
+                    if(stmt!=null){
+
+                        stmt.close();
+                    }
+
+                }catch(SQLException e){
+
+                    System.out.println(e.getMessage());
+
+                }
+
+            }
+
+        
+            
+            
+        }
+        else{
+            
+            JOptionPane.showMessageDialog(null, 
+                                   "Please select one article", 
+                                   "Cannot delete", 
                                    JOptionPane.WARNING_MESSAGE);
         }
         
@@ -518,21 +559,7 @@ public class ColumnistGui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int row = jTable1.getSelectedRow();
-
-        if(row!=-1){
-
-            String selectedTitle = jTable1.getModel().getValueAt(row, 1).toString();
-            articleDetails articleGui = new articleDetails(selectedTitle,con);
-            articleGui.setVisible(true);
-        }
-        else{
-
-            JOptionPane.showMessageDialog(null,
-                "Please select one article",
-                "Cannot update",
-                JOptionPane.WARNING_MESSAGE);
-        }
+         
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
