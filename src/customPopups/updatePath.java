@@ -167,7 +167,7 @@ public class updatePath extends javax.swing.JFrame {
             try{
                 stmt = con.createStatement();
                 stmt.executeUpdate("update article set path='"+newPath+"' where title='"+title+"'");
-                stmt.executeUpdate("update article set state='applied' where state='rejected'");
+                stmt.executeUpdate("update article set state='applied' where title='"+title+"'");
                 savedLabel.setText("The Path has been changed");
              
                 
