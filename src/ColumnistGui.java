@@ -494,10 +494,11 @@ public class ColumnistGui extends javax.swing.JFrame {
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         
            int row = jTable1.getSelectedRow();
-           String selectedTitle = jTable1.getModel().getValueAt(row, 1).toString();
+           
         
         if(row!=-1){
             
+            String selectedTitle = jTable1.getModel().getValueAt(row, 1).toString();
             Statement stmt = null;
              
             try{
@@ -542,14 +543,89 @@ public class ColumnistGui extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, 
                                    "Please select one article", 
-                                   "Cannot delete", 
+                                   "Cannot reject", 
                                    JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        // TODO add your handling code here:
+      
+           int row = jTable1.getSelectedRow();
+ 
+
+         
+            if(row!=-1 ){
+                   
+                String selectedTitle = jTable1.getModel().getValueAt(row, 1).toString();
+                String selectedState =  jTable1.getModel().getValueAt(row, 0).toString();
+                Statement stmt = null;
+                
+                if(selectedState.equals("accepted")==false){
+                    try{
+                        stmt = con.createStatement();
+
+                        stmt.executeUpdate("update article set state = 'accepted' where title = '"+selectedTitle+"' ");
+
+                         JOptionPane.showMessageDialog(null, 
+                                           "The article has accepted", 
+                                           "Article accepted", 
+                                           JOptionPane.INFORMATION_MESSAGE);
+
+                         initializeTab1();
+
+
+                    }
+                    catch(SQLException e){
+                        
+                        String error = e.getMessage();
+                        if(error.equals("Column count doesn't match value count at row 1"))
+                        {   
+                             JOptionPane.showMessageDialog(null, 
+                                           "There is not enough space in the magazine", 
+                                           "You cant accepted", 
+                                           JOptionPane.WARNING_MESSAGE);
+                            
+                        }
+                        else { System.out.println(error);}
+                    }
+                    finally{
+
+                        try{
+                            if(stmt!=null){
+
+                                stmt.close();
+                            }
+
+                        }catch(SQLException e){
+
+                            System.out.println(e.getMessage());
+
+                        }
+
+                    }
+
+                }
+                else if(selectedState.equals("accepted")==true){
+                    JOptionPane.showMessageDialog(null, 
+                                           "You cannot perform any action in accepted articles", 
+                                           "Error", 
+                                           JOptionPane.WARNING_MESSAGE);
+                
+                    
+                }
+        }
+
+       else{
+
+            JOptionPane.showMessageDialog(null, 
+                                "Please select one article", 
+                                "Cannot accept", 
+                                JOptionPane.WARNING_MESSAGE);
+            }
+        
+       
+        
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -560,6 +636,26 @@ public class ColumnistGui extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
          
+         int row = jTable1.getSelectedRow();
+        
+        if(row!=-1){
+            
+            String selectedTitle = jTable1.getModel().getValueAt(row, 1).toString();
+            articleDetails articleGui = new articleDetails(selectedTitle,con);
+            articleGui.setVisible(true);
+        }
+        else{
+            
+            JOptionPane.showMessageDialog(null, 
+                                   "Please select one article", 
+                                   "Cannot reject", 
+                                   JOptionPane.WARNING_MESSAGE);
+        }
+        
+        
+        
+        
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
