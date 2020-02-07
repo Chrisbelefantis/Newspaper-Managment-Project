@@ -476,9 +476,23 @@ public class ColumnistGui extends javax.swing.JFrame {
         
         if(row!=-1){
             
-            String selectedTitle = jTable1.getModel().getValueAt(row, 1).toString();
-            commentsGui cGui = new commentsGui(selectedTitle,con);
-            cGui.setVisible(true);
+          String selectedState = jTable1.getModel().getValueAt(row, 0).toString();
+          
+            if(!(selectedState.equals("accepted"))){
+            
+                String selectedTitle = jTable1.getModel().getValueAt(row, 1).toString();
+                commentsGui cGui = new commentsGui(selectedTitle,con);
+                cGui.setVisible(true);
+            }
+            else{
+                
+                JOptionPane.showMessageDialog(null, 
+                                   "You cant reject an accepted article", 
+                                   "Cannot reject", 
+                                   JOptionPane.WARNING_MESSAGE);
+            }
+            
+            
         }
         else{
             
@@ -493,50 +507,60 @@ public class ColumnistGui extends javax.swing.JFrame {
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         
-           int row = jTable1.getSelectedRow();
+          int row = jTable1.getSelectedRow();
            
         
         if(row!=-1){
             
-            String selectedTitle = jTable1.getModel().getValueAt(row, 1).toString();
-            Statement stmt = null;
-             
-            try{
-                stmt = con.createStatement();
-          
-                stmt.executeUpdate("update article set state = 'rejected' where title = '"+selectedTitle+"' ");
-                
-                 JOptionPane.showMessageDialog(null, 
-                                   "The article has been deleted", 
-                                   "Article Deleted", 
-                                   JOptionPane.INFORMATION_MESSAGE);
-                 
-                 initializeTab1();
+            String selectedState = jTable1.getModel().getValueAt(row, 0).toString();
             
-                
-            }
-            catch(SQLException e){
-                System.out.println(e.getMessage());
-
-            }
-            finally{
+            if(!(selectedState.equals("accepted"))){
+                String selectedTitle = jTable1.getModel().getValueAt(row, 1).toString();
+                Statement stmt = null;
 
                 try{
-                    if(stmt!=null){
+                    stmt = con.createStatement();
 
-                        stmt.close();
-                    }
+                    stmt.executeUpdate("update article set state = 'rejected' where title = '"+selectedTitle+"' ");
 
-                }catch(SQLException e){
+                     JOptionPane.showMessageDialog(null, 
+                                       "The article has been deleted", 
+                                       "Article Rejected", 
+                                       JOptionPane.INFORMATION_MESSAGE);
 
+                     initializeTab1();
+
+
+                }
+                catch(SQLException e){
                     System.out.println(e.getMessage());
 
                 }
+                finally{
 
+                    try{
+                        if(stmt!=null){
+
+                            stmt.close();
+                        }
+
+                    }catch(SQLException e){
+
+                        System.out.println(e.getMessage());
+
+                    }
+
+                }
             }
-
-        
-            
+            else{
+                
+                JOptionPane.showMessageDialog(null, 
+                                   "You cant reject an accepted article", 
+                                   "Cannot reject", 
+                                   JOptionPane.WARNING_MESSAGE);
+                
+                
+            }
             
         }
         else{

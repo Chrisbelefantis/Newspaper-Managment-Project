@@ -347,6 +347,7 @@ public class journalistGui extends javax.swing.JFrame {
         jButton11.setText("Update Title");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Journalist");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
