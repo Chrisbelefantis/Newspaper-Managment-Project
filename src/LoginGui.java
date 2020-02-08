@@ -31,12 +31,12 @@ public class LoginGui extends javax.swing.JFrame {
     public static void databaseConnect(){
        
        String Username = "root";
-       String Password = "";
+       String Password = "root";
        String CON_STRING = "jdbc:mysql://localhost:3306/newspaper?useSSL=false";
        boolean canLog = false;
        
        try{
-                con = DriverManager.getConnection(CON_STRING,Username,null);
+                con = DriverManager.getConnection(CON_STRING,Username,Password);
                 System.out.println("I am connected to database!"); 
        
        }

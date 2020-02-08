@@ -74,7 +74,7 @@ public class ColumnistGui extends javax.swing.JFrame {
                                         
                                         String secondAuthor = rs.getString(6);
                                         model.addRow(new Object[]{state,title,author,secondAuthor});
-                                        hasNext=rs.next();
+                                        hasNext = rs.next();
                                     
                                     }
                                     else{
@@ -142,7 +142,7 @@ public class ColumnistGui extends javax.swing.JFrame {
        boolean canLog = false;
        
        try{
-                con =DriverManager.getConnection(CON_STRING,Username,null);
+                con =DriverManager.getConnection(CON_STRING,Username,Password);
                 System.out.println("I am connected to database!!!"); 
        
        }

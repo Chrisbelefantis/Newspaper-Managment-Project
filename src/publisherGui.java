@@ -229,7 +229,7 @@ public class publisherGui extends javax.swing.JFrame {
        boolean canLog = false;
        
        try{
-                con = DriverManager.getConnection(CON_STRING,Username,null);
+                con = DriverManager.getConnection(CON_STRING,Username,Password);
                 System.out.println("I am connected to database!!!"); 
        
        }

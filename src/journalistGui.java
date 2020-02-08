@@ -262,7 +262,7 @@ public class journalistGui extends javax.swing.JFrame {
        String CON_STRING = "jdbc:mysql://localhost:3306/newspaper?useSSL=false";
      
        try{
-                con = DriverManager.getConnection(CON_STRING,Username,null);
+                con = DriverManager.getConnection(CON_STRING,Username,Password);
                 System.out.println("I am connected to database!"); 
        
        }

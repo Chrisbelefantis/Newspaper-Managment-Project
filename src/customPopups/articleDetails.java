@@ -72,17 +72,14 @@ public class articleDetails extends javax.swing.JFrame {
             lenghtLabel.setText(lenght+" pages");
             
             
-             rs2 = st.executeQuery("select state,title,magazine,length,category,journalistSubEmail from article inner join submits on title = '"+title+"' order by title");
- 
+            
 
              
-             if(rs2.next()){
-                 
-                 
-                 if(rs2.next()){
+             if(rs.next()){
+      
                    
-                     String secondAuthor = rs2.getString(6);
-                     secondsAuthorsLabel.setText(secondAuthor);
+                    String secondAuthor = rs.getString(9);
+                    secondsAuthorsLabel.setText(secondAuthor);
                      
                  }
                  else{
@@ -90,7 +87,7 @@ public class articleDetails extends javax.swing.JFrame {
                      
                  }
                  
-             }
+             
              
              
              rs3=st.executeQuery("select categoryTitle from category where id ="+category+"");
@@ -241,7 +238,7 @@ public class articleDetails extends javax.swing.JFrame {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        titleLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        titleLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -276,7 +273,6 @@ public class articleDetails extends javax.swing.JFrame {
         jScrollPane1.setViewportView(commentsArea);
 
         keywordsArea.setEditable(false);
-        keywordsArea.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
 
         summaryArea.setEditable(false);
         summaryArea.setColumns(20);
@@ -286,37 +282,37 @@ public class articleDetails extends javax.swing.JFrame {
         summaryArea.setWrapStyleWord(true);
         jScrollPane2.setViewportView(summaryArea);
 
-        stateLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        stateLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         stateLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
-        lenghtLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lenghtLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lenghtLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
-        newspaperIssueLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        newspaperIssueLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         newspaperIssueLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Author:");
 
-        authorsLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        authorsLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         authorsLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel10.setText("Second Author:");
 
-        secondsAuthorsLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        secondsAuthorsLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         secondsAuthorsLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel11.setText("Position:");
 
-        categoryLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        categoryLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         categoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setText("Category:");
 
-        postionLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        postionLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         postionLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -335,7 +331,7 @@ public class articleDetails extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
