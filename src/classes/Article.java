@@ -343,7 +343,7 @@ public class Article{
                                         "Cannot add article", 
                                          JOptionPane.WARNING_MESSAGE);
                          
-                System.out.println("We had a problem!");
+                System.out.println(e.getMessage());
             }
             finally{
             

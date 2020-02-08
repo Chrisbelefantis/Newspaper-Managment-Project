@@ -168,7 +168,7 @@ public class updateLengh extends javax.swing.JFrame {
                 
                 stmt.executeUpdate("update article set length="+length+" where title ='"+title+"' ");
                 stmt.executeUpdate("update article set state='applied' where ='"+title+"'");
-              
+                 stmt.executeUpdate("update article set comments = NULL where title='"+title+"'");
                  savedLabel.setText("The lenght has been changed");
                 
                 

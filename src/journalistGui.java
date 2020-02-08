@@ -164,17 +164,9 @@ public class journalistGui extends javax.swing.JFrame {
                    isResultSet = stmt.getMoreResults();
                    
                }
-                
-             
-                
-                
-                
+    
              }
-   
-            
-            
-            
-         
+    
          catch(SQLException e)
          {
             System.out.println(e.getMessage());;

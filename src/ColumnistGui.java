@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -17,6 +19,7 @@ public class ColumnistGui extends javax.swing.JFrame {
     
     private String email;
     private static Connection con=null;
+    private  String ColumnistNewspaper;
     
     public ColumnistGui() {
         initComponents();
@@ -26,9 +29,38 @@ public class ColumnistGui extends javax.swing.JFrame {
         initComponents();
         this.email = email;
         databaseConnect();
+        
+        Statement st = null;
+        ResultSet se = null;
+        try{
+            st = con.createStatement();
+            se = st.executeQuery("select newspaperName from working where workerEmail='"+email+"'");
+            if(se.next()) this.ColumnistNewspaper =se.getString("newspaperName");
+            se.close();
+            st.close();
+            
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());;
+        }finally{
+            try{
+                    
+                if(st!=null) {   
+                 st.close();
+                }
+                if(se!=null) {   
+                 se.close();
+                }
+             }
+                catch(SQLException e)  {System.out.println(e.getMessage());;}
+                
+            }
+  
+          
          initializeTab1();
-        
-        
+         initializeTab2();
+
+         
         
     }
      
@@ -133,6 +165,72 @@ public class ColumnistGui extends javax.swing.JFrame {
      }
 
     
+       public void initializeTab2(){
+           
+           
+          DefaultComboBoxModel dm = new DefaultComboBoxModel(); 
+          Statement st = null;
+          ResultSet se = null;
+           
+        try{   
+            st  = con.createStatement();
+            se= st.executeQuery("select magazine.* from newspaper inner join magazine on newspaper.Name = magazine.newspaperName "
+                    + "where newspaper.Name = \""+ColumnistNewspaper+"\"");
+            
+            
+            selectIssue.setModel(dm);
+            
+         
+            while(se.next())
+            {
+                
+                selectIssue.addItem("Νο."+ se.getString(2));
+            }
+            
+            selectIssue.setSelectedIndex(-1);
+            
+           
+      
+            
+            
+            editPanel.setVisible(false);
+        
+          
+            
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());;
+        }finally{
+                    try{
+                    
+                if(st!=null) {   
+                 st.close();
+                }
+                if(se!=null) {   
+                 se.close();
+                }
+             }catch(SQLException e)  {System.out.println(e.getMessage());;}
+        }
+    
+    }
+    
+           
+       public static boolean allDifferent( String[]a){
+        for(int i = 0; i < a.length - 1; i++){
+         for (int j = i + 1; j < a.length; j++){
+             if (a[i].equals(a[j]))
+                 return false;
+         }
+    }
+    return true;
+    }    
+           
+           
+           
+       
+     
+     
     
        public static void databaseConnect(){
        
@@ -183,6 +281,14 @@ public class ColumnistGui extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        selectIssue = new javax.swing.JComboBox<>();
+        jSeparator2 = new javax.swing.JSeparator();
+        editPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
 
@@ -286,7 +392,7 @@ public class ColumnistGui extends javax.swing.JFrame {
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -353,7 +459,7 @@ public class ColumnistGui extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -389,15 +495,96 @@ public class ColumnistGui extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Article Manager", jPanel2);
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel13.setText("Select newspapers issue: ");
+
+        selectIssue.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        selectIssue.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectIssue.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selectIssueItemStateChanged(evt);
+            }
+        });
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Current Postion", "Article's Title", "Select New Position"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Make sure that you set the position for every article and the positions are distinct");
+
+        javax.swing.GroupLayout editPanelLayout = new javax.swing.GroupLayout(editPanel);
+        editPanel.setLayout(editPanelLayout);
+        editPanelLayout.setHorizontalGroup(
+            editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editPanelLayout.createSequentialGroup()
+                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(editPanelLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(editPanelLayout.createSequentialGroup()
+                        .addGap(307, 307, 307)
+                        .addComponent(jButton2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        editPanelLayout.setVerticalGroup(
+            editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addGap(47, 47, 47))
+        );
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 729, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(selectIssue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 190, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(editPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 335, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(selectIssue))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(235, 235, 235))
         );
 
         jTabbedPane1.addTab("Set Articles Position", jPanel4);
@@ -406,11 +593,11 @@ public class ColumnistGui extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 729, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 335, Short.MAX_VALUE)
+            .addGap(0, 333, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Submit New Article", jPanel5);
@@ -419,11 +606,11 @@ public class ColumnistGui extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 729, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 335, Short.MAX_VALUE)
+            .addGap(0, 333, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Add New Category", jPanel6);
@@ -436,17 +623,17 @@ public class ColumnistGui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1)
-                .addGap(42, 42, 42))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1)))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -682,6 +869,167 @@ public class ColumnistGui extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void selectIssueItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectIssueItemStateChanged
+
+      
+        //EditPanel.setVisible(true);
+       editPanel.setVisible(true);
+       
+        JComboBox comboBox = (JComboBox) evt.getSource();
+
+        Object item = evt.getItem();
+        String num =  item.toString().substring(3,4);
+        
+        
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        
+        Statement st = null;
+        ResultSet rs = null;
+        ResultSet rs2 = null;
+        
+        
+        try{
+            
+            st = con.createStatement();
+            rs2 = st.executeQuery("select count(*) from article "
+                    + "where newspaper = \""+ColumnistNewspaper+"\" and magazine = "+num+" and state = \"accepted\";");
+                 
+          
+            
+            rs2.next(); 
+            int count = Integer.parseInt(rs2.getString(1));
+
+            String positions[] = new String[count];
+
+            for(int i=0; i<count; i++){
+
+                positions[i] = Integer.toString(i+1);
+
+            }
+            
+            
+            JComboBox position = new JComboBox(positions);
+            
+            
+             rs = st.executeQuery("select position,Title from article "
+                    + "where newspaper = \""+ColumnistNewspaper+"\" and magazine = "+num+" and state = \"accepted\"  order by position asc;");
+            
+            
+            while(rs.next()){
+                
+                model.addRow(new Object[]{rs.getString(1),rs.getString(2),"Click to edit"} );
+                
+            }
+            
+            jTable2.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(position));
+            
+            
+        }catch(SQLException e){
+            
+            System.out.println(e.getMessage());
+            
+        }finally{        
+            try{
+                
+                if(st!=null){
+                    st.close();
+                }
+                if(rs!=null){
+                    
+                    rs.close();
+                }
+                if(rs2!=null){
+                    
+                    rs2.close();
+                }
+                
+            
+            }catch(SQLException e)    { System.out.println(e.getMessage());  }
+      }
+
+            
+          
+        
+        
+        
+        
+    }//GEN-LAST:event_selectIssueItemStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        int count = jTable2.getRowCount();
+        boolean notSelected = false;
+        String[] positions = new String[count];
+        
+        
+        for(int i = 0 ; i<count; i++){
+            
+            
+            positions[i] = jTable2.getValueAt(i,2).toString();
+            
+            if(positions[i].equals("Click to edit")){
+                notSelected = true;
+            }
+            
+        }
+ 
+        
+        if(allDifferent(positions) && !notSelected){
+            
+           
+            Statement st = null;
+            try{
+            
+                
+                st = con.createStatement();
+                
+                for(int i=0 ; i<count; i++){
+                    
+                    String title = jTable2.getValueAt(i, 1).toString();
+                    
+                    st.executeUpdate("update article set position = "+positions[i]+" where title = '"+title+"'");
+                    
+                    
+                }
+                
+                
+             
+
+
+                JOptionPane.showMessageDialog(null, 
+                                           "Action performed", 
+                                            "Your changes have been saved", 
+                                             JOptionPane.INFORMATION_MESSAGE);
+
+                st.close();
+            }catch(SQLException e){
+                
+                System.out.println(e.getMessage());
+            }
+            
+        }else if(notSelected){
+            
+             JOptionPane.showMessageDialog(null, 
+                                       "Please select the position for every article", 
+                                        "Cannot perform this action", 
+                                         JOptionPane.WARNING_MESSAGE);
+            
+        }else{
+            
+             JOptionPane.showMessageDialog(null, 
+                                       "Two or more articles have the same position", 
+                                       "Cannot perform this action", 
+                                         JOptionPane.WARNING_MESSAGE);
+            
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -718,15 +1066,19 @@ public class ColumnistGui extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel editPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -735,8 +1087,12 @@ public class ColumnistGui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JComboBox<String> selectIssue;
     // End of variables declaration//GEN-END:variables
 }
