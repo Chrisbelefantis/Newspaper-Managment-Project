@@ -138,7 +138,7 @@ public class updateTitle extends javax.swing.JFrame {
                 stmt = con.createStatement();
                 stmt.executeUpdate("update article set title='"+newTitle+"' where title='"+title+"'");
                 stmt.executeUpdate("update article set state='applied' where title='"+newTitle+"'");
-                 stmt.executeUpdate("update article set comments = NULL where title='"+title+"'");
+                stmt.executeUpdate("update article set comments = NULL where title='"+title+"'");
                 savedLabel.setText("The tilte has been changed");
              
                 

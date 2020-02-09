@@ -257,8 +257,7 @@ public class Article{
         
 	public void placeArticle(){
             
-            //mising triger that checks if journalist is editor and returns position
-           
+  
             
         
             Statement  stmt=null;

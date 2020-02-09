@@ -1,4 +1,6 @@
 import customPopups.*;
+import java.io.File;
+import classes.Article;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
@@ -6,9 +8,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
@@ -59,7 +64,7 @@ public class ColumnistGui extends javax.swing.JFrame {
           
          initializeTab1();
          initializeTab2();
-
+         initializeTab3();
          
         
     }
@@ -226,6 +231,46 @@ public class ColumnistGui extends javax.swing.JFrame {
     return true;
     }    
            
+       
+    public  void initializeTab3(){
+        
+        DefaultComboBoxModel dm = new DefaultComboBoxModel(); 
+           
+        try{   
+            Statement st  = con.createStatement();
+            ResultSet se= st.executeQuery("select magazine.* from newspaper inner join magazine on newspaper.Name = magazine.newspaperName "
+                    + "where newspaper.Name = \""+ColumnistNewspaper+"\"");
+            
+            
+            selectIssue1.setModel(dm);
+            
+         
+            while(se.next())
+            {
+                
+                selectIssue1.addItem("Νο."+ se.getString(2));
+            }
+            
+            selectIssue1.setSelectedIndex(-1);
+            
+            EditPanel.setVisible(false);
+            st.close();
+            se.close();
+            
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());;
+        }
+       
+        
+        
+        
+        
+        
+        
+        
+    }
            
            
        
@@ -290,10 +335,42 @@ public class ColumnistGui extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        selectIssue1 = new javax.swing.JComboBox<>();
+        EditPanel = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        pathLabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        selectLenght = new javax.swing.JComboBox<>();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel12 = new javax.swing.JLabel();
+        linesAvailable = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        selectCategory = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        titleField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        summaryField = new javax.swing.JTextArea();
+        jLabel8 = new javax.swing.JLabel();
+        pathButton1 = new javax.swing.JButton();
+        pathButton2 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        zeroPictures = new javax.swing.JRadioButton();
+        onePicture = new javax.swing.JRadioButton();
+        twoPictures = new javax.swing.JRadioButton();
+        onePictureLabel = new javax.swing.JLabel();
+        twoPicturesLabel = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        keywordsText = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        addAuthor = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editor in Chief");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(46, 76, 82));
 
@@ -312,7 +389,7 @@ public class ColumnistGui extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(634, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,7 +469,7 @@ public class ColumnistGui extends javax.swing.JFrame {
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -486,7 +563,7 @@ public class ColumnistGui extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton1))
@@ -565,7 +642,7 @@ public class ColumnistGui extends javax.swing.JFrame {
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(selectIssue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 190, Short.MAX_VALUE))
+                        .addGap(0, 212, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -589,15 +666,283 @@ public class ColumnistGui extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Set Articles Position", jPanel4);
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel14.setText("Select newspapers issue: ");
+
+        selectIssue1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        selectIssue1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectIssue1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selectIssue1ItemStateChanged(evt);
+            }
+        });
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        jButton4.setText("Choose Path");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setText("Add extra author:");
+
+        selectLenght.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectLenght.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectLenghtActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Available pages:");
+
+        linesAvailable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel4.setText("Add Keywords:");
+
+        selectCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel5.setText("Select Category:");
+
+        titleField.setBackground(new java.awt.Color(240, 240, 240));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        jLabel6.setText("Seperated with a comma");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Write a quick summary:");
+
+        summaryField.setColumns(20);
+        summaryField.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        summaryField.setLineWrap(true);
+        summaryField.setRows(5);
+        summaryField.setWrapStyleWord(true);
+        jScrollPane3.setViewportView(summaryField);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel8.setText("Select number of Pictures:");
+
+        pathButton1.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        pathButton1.setText("Choose Path");
+        pathButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pathButton1ActionPerformed(evt);
+            }
+        });
+
+        pathButton2.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        pathButton2.setText("Choose Path");
+        pathButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pathButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton5.setText("Submit");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        zeroPictures.setText("0");
+        zeroPictures.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                zeroPicturesItemStateChanged(evt);
+            }
+        });
+
+        onePicture.setText("1");
+        onePicture.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                onePictureItemStateChanged(evt);
+            }
+        });
+
+        twoPictures.setText("2");
+        twoPictures.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                twoPicturesItemStateChanged(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Add Title:");
+
+        keywordsText.setBackground(new java.awt.Color(240, 240, 240));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel10.setText("Articles Lenght:");
+
+        addAuthor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout EditPanelLayout = new javax.swing.GroupLayout(EditPanel);
+        EditPanel.setLayout(EditPanelLayout);
+        EditPanelLayout.setHorizontalGroup(
+            EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EditPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator3)
+                    .addGroup(EditPanelLayout.createSequentialGroup()
+                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(EditPanelLayout.createSequentialGroup()
+                                .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
+                                .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(addAuthor, 0, 147, Short.MAX_VALUE)
+                                    .addComponent(titleField)))
+                            .addGroup(EditPanelLayout.createSequentialGroup()
+                                .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(EditPanelLayout.createSequentialGroup()
+                                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(EditPanelLayout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(22, 22, 22))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditPanelLayout.createSequentialGroup()
+                                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel4))
+                                        .addGap(15, 15, 15)))
+                                .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(keywordsText, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(selectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(selectLenght, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(EditPanelLayout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(jButton4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(pathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(EditPanelLayout.createSequentialGroup()
+                                .addGap(253, 253, 253)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(linesAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(3, 3, 3)
+                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(EditPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(zeroPictures)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(onePicture)
+                                .addGap(11, 11, 11)
+                                .addComponent(twoPictures))
+                            .addComponent(jScrollPane3)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, EditPanelLayout.createSequentialGroup()
+                                .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, EditPanelLayout.createSequentialGroup()
+                                        .addComponent(pathButton2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(twoPicturesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, EditPanelLayout.createSequentialGroup()
+                                        .addComponent(pathButton1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(onePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(13, 13, 13)))
+                .addContainerGap())
+        );
+        EditPanelLayout.setVerticalGroup(
+            EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EditPanelLayout.createSequentialGroup()
+                .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(linesAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(EditPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EditPanelLayout.createSequentialGroup()
+                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(addAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(selectLenght, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EditPanelLayout.createSequentialGroup()
+                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(zeroPictures, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(onePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(twoPictures, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pathButton1)
+                            .addComponent(onePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pathButton2)
+                            .addComponent(twoPicturesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(EditPanelLayout.createSequentialGroup()
+                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(selectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(keywordsText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(pathLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(selectIssue1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(EditPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(selectIssue1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EditPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Submit New Article", jPanel5);
@@ -606,11 +951,11 @@ public class ColumnistGui extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 722, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
+            .addGap(0, 347, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Add New Category", jPanel6);
@@ -622,9 +967,8 @@ public class ColumnistGui extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -632,8 +976,8 @@ public class ColumnistGui extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -771,13 +1115,30 @@ public class ColumnistGui extends javax.swing.JFrame {
                 String selectedTitle = jTable1.getModel().getValueAt(row, 1).toString();
                 String selectedState =  jTable1.getModel().getValueAt(row, 0).toString();
                 Statement stmt = null;
+                Statement stmt2 = null;
+                ResultSet rs = null;
                 
                 if(selectedState.equals("accepted")==false){
                     try{
                         stmt = con.createStatement();
-
                         stmt.executeUpdate("update article set state = 'accepted' where title = '"+selectedTitle+"' ");
-
+                        
+                        stmt2 = con.createStatement();
+                        rs = stmt2.executeQuery("select path from article where title ='"+selectedTitle+"' ");
+                        
+                        if(rs.next()){
+                            
+                            
+                            
+                            Date date = new Date();  
+                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd");  
+                            String strDate= formatter.format(date);  
+                            
+                            String selectedPath = rs.getString("path");
+                            stmt.executeUpdate("insert into approves values('"+email+"','"+selectedPath+"','"+strDate+"') ");
+                        }
+                        
+                        
                          JOptionPane.showMessageDialog(null, 
                                            "The article has accepted", 
                                            "Article accepted", 
@@ -806,6 +1167,14 @@ public class ColumnistGui extends javax.swing.JFrame {
                             if(stmt!=null){
 
                                 stmt.close();
+                            }
+                            if(stmt2!=null){
+
+                                stmt2.close();
+                            }
+                            if(rs!=null){
+
+                                rs.close();
                             }
 
                         }catch(SQLException e){
@@ -1030,6 +1399,269 @@ public class ColumnistGui extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void selectIssue1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectIssue1ItemStateChanged
+
+        zeroPictures.setSelected(true);
+        EditPanel.setVisible(true);
+        JComboBox comboBox = (JComboBox) evt.getSource();
+
+        Object item = evt.getItem();
+
+        String num =  item.toString().substring(3,4);
+
+        linesAvailable.setText(Article.availableSpace(ColumnistNewspaper,Integer.parseInt(num),con ));
+
+        DefaultComboBoxModel dm1 = new DefaultComboBoxModel();
+        DefaultComboBoxModel dm2 = new DefaultComboBoxModel();
+        DefaultComboBoxModel dm3 = new DefaultComboBoxModel();
+
+        try{
+            Statement st1  = con.createStatement();
+            Statement st2  = con.createStatement();
+            Statement st3  = con.createStatement();
+            ResultSet se1= st1.executeQuery("select pages from magazine where newspaperName=\""+ColumnistNewspaper+"\" and magazineNum="+num+"");
+            ResultSet se2= st2.executeQuery("Select * from category");
+            ResultSet se3= st3.executeQuery(" select journalistEmail from journalist "
+                + "inner join working on journalistEmail = workerEmail where newspaperName = \""+ColumnistNewspaper+"\" and  journalistEmail <> '"+email+"'");
+
+            selectLenght.setModel(dm1);
+            selectCategory.setModel(dm2);
+            addAuthor.setModel(dm3);
+
+            if(se1.next())
+            {
+                int pages = se1.getInt(1);
+                for(int i=1; i<=pages; i++)
+                {
+
+                    selectLenght.addItem(Integer.toString(i));
+                }
+
+            }
+
+            while(se2.next())
+            {
+                selectCategory.addItem(se2.getString(2));
+            }
+
+            addAuthor.addItem("none");
+
+            while(se3.next())
+            {
+                addAuthor.addItem(se3.getString(1));
+
+            }
+
+            selectCategory.setSelectedIndex(-1);
+            selectLenght.setSelectedIndex(-1);
+
+            st1.close();
+            st2.close();
+            st3.close();
+            se1.close();
+            se2.close();
+            se3.close();
+
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+    }//GEN-LAST:event_selectIssue1ItemStateChanged
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        String filename = f.getAbsolutePath();
+        pathLabel.setText(filename);
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void selectLenghtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectLenghtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectLenghtActionPerformed
+
+    private void pathButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pathButton1ActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        String filename = f.getAbsolutePath();
+        onePictureLabel.setText(filename);
+
+    }//GEN-LAST:event_pathButton1ActionPerformed
+
+    private void pathButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pathButton2ActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        String filename = f.getAbsolutePath();
+        twoPicturesLabel.setText(filename);
+
+    }//GEN-LAST:event_pathButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+        String magazineNum;
+        String lenght;
+        String category;
+        String keywords;
+        String summary;
+        String title;
+
+        Object item =selectIssue1.getSelectedItem();
+        magazineNum = item.toString().substring(3,4);
+
+        Article newArticle = new Article(ColumnistNewspaper,Integer.parseInt(magazineNum),email,con);
+
+        if(titleField.getText().equals("")==false)
+        {
+
+            title = titleField.getText();
+            newArticle.setTitle(title);
+
+            if(selectLenght.getSelectedIndex()!=-1){
+
+                item =selectLenght.getSelectedItem();
+                lenght = item.toString();
+                newArticle.setLenght(Integer.parseInt(lenght));
+
+                if(selectCategory.getSelectedIndex()!=-1){
+
+                    item =selectCategory.getSelectedItem();
+                    category=item.toString();
+                    System.out.println(category);
+                    newArticle.setCategory(category);
+
+                    if(pathLabel.getText().equals("")==false){
+
+                        newArticle.setPath(pathLabel.getText());
+
+                        newArticle.setKeywords(keywordsText.getText());
+
+                        if(summaryField.getText().equals("")==false)
+                        {
+                            newArticle.setSummary(summaryField.getText());
+
+                        }
+
+                        if(addAuthor.getSelectedIndex()!=0){
+
+                            Object extraAuhtor = addAuthor.getSelectedItem();
+
+                            newArticle.setExtraAuthor(extraAuhtor.toString());
+
+                        }
+
+                        if(onePicture.isSelected())
+                        {
+
+                            newArticle.setPicture(onePictureLabel.getText());
+                        }
+                        else if(twoPictures.isSelected()){
+
+                            newArticle.setPicture(onePictureLabel.getText(), twoPicturesLabel.getText());
+                        }
+
+                        int availableLines =  Integer.parseInt(linesAvailable.getText());
+                        int selectedLines = Integer.parseInt(lenght);
+
+                        if(selectedLines<=availableLines  ){
+
+                            newArticle.placeArticle();
+
+                            initializeTab3();
+                            initializeTab1();
+
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,
+                                "Sorry your articles lenghs is more than the available lenght",
+                                "Cannot add article",
+                                JOptionPane.WARNING_MESSAGE);
+
+                        }
+
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,
+                            "Please select the articles path",
+                            "Cannot add article",
+                            JOptionPane.WARNING_MESSAGE);
+
+                    }
+
+                }
+                else{
+
+                    JOptionPane.showMessageDialog(null,
+                        "Please select the articles category in pages",
+                        "Cannot add article",
+                        JOptionPane.WARNING_MESSAGE);
+
+                }
+            }
+            else{
+
+                JOptionPane.showMessageDialog(null,
+                    "Please select the articles length in pages",
+                    "Cannot add article",
+                    JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
+        else{
+
+            JOptionPane.showMessageDialog(null,
+                "Please add Title to your article",
+                "Cannot add article",
+                JOptionPane.WARNING_MESSAGE);
+
+        }
+
+       
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void zeroPicturesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_zeroPicturesItemStateChanged
+
+        if(zeroPictures.isSelected())
+        {
+
+            pathButton1.setVisible(false);
+            pathButton2.setVisible(false);
+            onePictureLabel.setVisible(false);
+            twoPicturesLabel.setVisible(false);
+        }
+
+    }//GEN-LAST:event_zeroPicturesItemStateChanged
+
+    private void onePictureItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_onePictureItemStateChanged
+        if(onePicture.isSelected())
+        {
+
+            pathButton1.setVisible(true);
+            pathButton2.setVisible(false);
+            onePictureLabel.setVisible(true);
+            twoPicturesLabel.setVisible(false);
+        }
+
+    }//GEN-LAST:event_onePictureItemStateChanged
+
+    private void twoPicturesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_twoPicturesItemStateChanged
+        if(twoPictures.isSelected())
+        {
+
+            pathButton1.setVisible(true);
+            pathButton2.setVisible(true);
+            onePictureLabel.setVisible(true);
+            twoPicturesLabel.setVisible(true);
+
+        }
+    }//GEN-LAST:event_twoPicturesItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -1066,6 +1698,8 @@ public class ColumnistGui extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel EditPanel;
+    private javax.swing.JComboBox<String> addAuthor;
     private javax.swing.JPanel editPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -1074,12 +1708,24 @@ public class ColumnistGui extends javax.swing.JFrame {
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1088,11 +1734,28 @@ public class ColumnistGui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextField keywordsText;
+    private javax.swing.JLabel linesAvailable;
+    private javax.swing.JRadioButton onePicture;
+    private javax.swing.JLabel onePictureLabel;
+    private javax.swing.JButton pathButton1;
+    private javax.swing.JButton pathButton2;
+    private javax.swing.JLabel pathLabel;
+    private javax.swing.JComboBox<String> selectCategory;
     private javax.swing.JComboBox<String> selectIssue;
+    private javax.swing.JComboBox<String> selectIssue1;
+    private javax.swing.JComboBox<String> selectLenght;
+    private javax.swing.JTextArea summaryField;
+    private javax.swing.JTextField titleField;
+    private javax.swing.JRadioButton twoPictures;
+    private javax.swing.JLabel twoPicturesLabel;
+    private javax.swing.JRadioButton zeroPictures;
     // End of variables declaration//GEN-END:variables
 }
