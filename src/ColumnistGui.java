@@ -65,6 +65,7 @@ public class ColumnistGui extends javax.swing.JFrame {
          initializeTab1();
          initializeTab2();
          initializeTab3();
+         initializeTab4();
          
         
     }
@@ -221,7 +222,7 @@ public class ColumnistGui extends javax.swing.JFrame {
     }
     
            
-       public static boolean allDifferent( String[]a){
+  public static boolean allDifferent( String[]a){
         for(int i = 0; i < a.length - 1; i++){
          for (int j = i + 1; j < a.length; j++){
              if (a[i].equals(a[j]))
@@ -229,7 +230,7 @@ public class ColumnistGui extends javax.swing.JFrame {
          }
     }
     return true;
-    }    
+  }    
            
        
     public  void initializeTab3(){
@@ -273,7 +274,53 @@ public class ColumnistGui extends javax.swing.JFrame {
     }
            
            
-       
+    public void initializeTab4(){
+        
+         
+          DefaultComboBoxModel dm = new DefaultComboBoxModel(); 
+          Statement st = null;
+          ResultSet se = null;
+           
+        try{   
+            st  = con.createStatement();
+            se= st.executeQuery("select categoryTitle from category");
+            
+            
+            subcategoryField.setModel(dm);
+            
+         
+            subcategoryField.addItem("none");
+            
+            
+            while(se.next())
+            {
+                
+                subcategoryField.addItem(se.getString(1));
+            }
+            
+            
+            
+   
+        
+          
+            
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());;
+        }finally{
+                    try{
+                    
+                if(st!=null) {   
+                 st.close();
+                }
+                if(se!=null) {   
+                 se.close();
+                }
+             }catch(SQLException e)  {System.out.println(e.getMessage());;}
+        }
+           
+ }
      
      
     
@@ -367,6 +414,14 @@ public class ColumnistGui extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         addAuthor = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        categoryField = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        subcategoryField = new javax.swing.JComboBox<>();
+        saveButtom = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        descriptionField = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editor in Chief");
@@ -384,8 +439,8 @@ public class ColumnistGui extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -618,7 +673,7 @@ public class ColumnistGui extends javax.swing.JFrame {
                     .addGroup(editPanelLayout.createSequentialGroup()
                         .addGap(307, 307, 307)
                         .addComponent(jButton2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         editPanelLayout.setVerticalGroup(
             editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -638,11 +693,11 @@ public class ColumnistGui extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
+                        .addGap(142, 142, 142)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(selectIssue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 212, Short.MAX_VALUE))
+                        .addGap(0, 182, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -947,15 +1002,79 @@ public class ColumnistGui extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Submit New Article", jPanel5);
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel15.setText("Category name:");
+
+        categoryField.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel16.setText("Subcateogory of:");
+
+        subcategoryField.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        subcategoryField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        saveButtom.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        saveButtom.setText("Save");
+        saveButtom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtomActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel17.setText("Description:");
+
+        descriptionField.setColumns(20);
+        descriptionField.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        descriptionField.setLineWrap(true);
+        descriptionField.setRows(5);
+        descriptionField.setWrapStyleWord(true);
+        jScrollPane4.setViewportView(descriptionField);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 722, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
+                        .addGap(61, 61, 61)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(subcategoryField, 0, 202, Short.MAX_VALUE)
+                            .addComponent(categoryField)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(285, 285, 285)
+                        .addComponent(saveButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(275, 275, 275)
+                        .addComponent(jLabel17)))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 347, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(categoryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(subcategoryField))
+                .addGap(22, 22, 22)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(saveButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
 
         jTabbedPane1.addTab("Add New Category", jPanel6);
@@ -1662,6 +1781,135 @@ public class ColumnistGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_twoPicturesItemStateChanged
 
+    private void saveButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtomActionPerformed
+        
+       
+        Statement st = null;
+        ResultSet rs = null;
+        Statement st2 = null;
+        String subcategoryOf = null;
+        String subcategoryId = null;
+        String description = null;
+        String newCategory;
+        
+        
+        
+        
+        
+        
+        
+        
+        try{
+            
+            
+            
+            newCategory = categoryField.getText();
+
+       
+            if(subcategoryField.getSelectedIndex()!=0){
+                
+
+
+                Object item =subcategoryField.getSelectedItem();
+                subcategoryOf = item.toString();
+                
+                
+                st = con.createStatement();
+                rs = st.executeQuery("select id from category where categoryTitle='"+subcategoryOf+"';");
+                
+                if(rs.next()){
+                    
+                    subcategoryId = rs.getString("id");  
+                  
+                    
+                }
+            }
+            
+            if(!descriptionField.getText().equals("")){
+                
+                
+                description = descriptionField.getText();
+                
+            }
+            
+            
+            st2 = con.createStatement();
+            
+            if(!categoryField.getText().equals("")){
+                
+                if(description!= null && subcategoryId!=null){
+                    
+               
+                    st2.executeUpdate("insert into category values(NULL,'"+newCategory+"','"+description+"',"
+                        + "'"+subcategoryId+"')");
+                }
+                else if(description== null && subcategoryId!=null){
+                        
+                   
+                        st2.executeUpdate("insert into category values(NULL,'"+newCategory+"',NULL,"
+                        + "'"+subcategoryId+"')");
+                }
+                else if(description!= null && subcategoryId==null){
+                    
+                         st2.executeUpdate("insert into category values(NULL,'"+newCategory+"','"+description+"', NULL) ");
+                       
+                }else{
+                  
+                     st2.executeUpdate("insert into category values(NULL,'"+newCategory+"',NULL, NULL) ");
+                }
+                
+                JOptionPane.showMessageDialog(null, 
+                                   "You just added a new category", 
+                                   "New category added", 
+                                   JOptionPane.INFORMATION_MESSAGE);
+                
+                initializeTab4();
+                
+            }else{
+                
+                JOptionPane.showMessageDialog(null, 
+                                   "Please insert the name of the new category", 
+                                   "Cannot add category", 
+                                   JOptionPane.WARNING_MESSAGE);
+                
+            }
+            
+            
+
+            
+        
+        }catch(SQLException e){
+            
+            System.out.println(e.getMessage());
+            
+            
+        }finally{
+            try{
+                
+                if(st!=null){
+                    
+                    st.close();
+                }
+                if(rs!=null){
+                    rs.close();
+                }
+                  if(st2!=null){
+                    st2.close();
+                }
+                
+                
+            }catch(SQLException e) { System.out.println(e.getMessage()); }
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_saveButtomActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1700,6 +1948,8 @@ public class ColumnistGui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel EditPanel;
     private javax.swing.JComboBox<String> addAuthor;
+    private javax.swing.JTextField categoryField;
+    private javax.swing.JTextArea descriptionField;
     private javax.swing.JPanel editPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -1718,6 +1968,9 @@ public class ColumnistGui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1735,6 +1988,7 @@ public class ColumnistGui extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -1748,10 +2002,12 @@ public class ColumnistGui extends javax.swing.JFrame {
     private javax.swing.JButton pathButton1;
     private javax.swing.JButton pathButton2;
     private javax.swing.JLabel pathLabel;
+    private javax.swing.JButton saveButtom;
     private javax.swing.JComboBox<String> selectCategory;
     private javax.swing.JComboBox<String> selectIssue;
     private javax.swing.JComboBox<String> selectIssue1;
     private javax.swing.JComboBox<String> selectLenght;
+    private javax.swing.JComboBox<String> subcategoryField;
     private javax.swing.JTextArea summaryField;
     private javax.swing.JTextField titleField;
     private javax.swing.JRadioButton twoPictures;
