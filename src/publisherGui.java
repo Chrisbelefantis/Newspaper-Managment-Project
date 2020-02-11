@@ -661,6 +661,11 @@ public class publisherGui extends javax.swing.JFrame {
                 saveButtonMouseClicked(evt);
             }
         });
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout resultsPanelLayout = new javax.swing.GroupLayout(resultsPanel);
         resultsPanel.setLayout(resultsPanelLayout);
@@ -1149,7 +1154,7 @@ public class publisherGui extends javax.swing.JFrame {
                 // The item affected by the event.
                 Object item = evt.getItem();
 
-              char num =  item.toString().charAt(3);
+              String num =  item.toString().substring(3);
                
              try{   
             Statement st  = con.createStatement();
@@ -1193,7 +1198,7 @@ public class publisherGui extends javax.swing.JFrame {
        
         int sliderValue = jSlider1.getValue();
         
-        char selection = selectNewspaper.getSelectedItem().toString().charAt(3);
+        String selection = selectNewspaper.getSelectedItem().toString().substring(3);
         
    
         
@@ -1315,6 +1320,10 @@ public class publisherGui extends javax.swing.JFrame {
         initializeTab3();
         jToggleButton2.setSelected(false);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveButtonActionPerformed
     
     /**
      * @param args the command line arguments

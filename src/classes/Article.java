@@ -76,6 +76,7 @@ public class Article{
                        rs =(ResultSet) stmt.getResultSet();
                        rs.next();
                        ResultSetMetaData rsmd = (ResultSetMetaData)rs.getMetaData();
+                   
                        if(rsmd.getColumnCount()==2){
                            
                            return rs.getString(2);

@@ -85,7 +85,7 @@ public class ColumnistGui extends javax.swing.JFrame {
        
               stmt=con.createStatement();
               rs = stmt.executeQuery("select state,title,magazine,length,category,journalistSubEmail from article inner join submits on path = submittedArticle "
-                      + "order by state,title");
+                      + "where newspaper = '"+ColumnistNewspaper+"' order by state,title");
               
               
            
@@ -1366,7 +1366,7 @@ public class ColumnistGui extends javax.swing.JFrame {
         JComboBox comboBox = (JComboBox) evt.getSource();
 
         Object item = evt.getItem();
-        String num =  item.toString().substring(3,4);
+        String num =  item.toString().substring(3);
         
         
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
@@ -1526,7 +1526,7 @@ public class ColumnistGui extends javax.swing.JFrame {
 
         Object item = evt.getItem();
 
-        String num =  item.toString().substring(3,4);
+        String num =  item.toString().substring(3);
 
         linesAvailable.setText(Article.availableSpace(ColumnistNewspaper,Integer.parseInt(num),con ));
 

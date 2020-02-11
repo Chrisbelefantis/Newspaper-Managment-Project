@@ -969,7 +969,7 @@ public class journalistGui extends javax.swing.JFrame {
 
                 Object item = evt.getItem();
 
-               String num =  item.toString().substring(3,4);
+               String num =  item.toString().substring(3);
               
                           
               linesAvailable.setText(Article.availableSpace(journalistsNewspaper,Integer.parseInt(num),con ));
