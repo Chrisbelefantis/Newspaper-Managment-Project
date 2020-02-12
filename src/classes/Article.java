@@ -102,7 +102,9 @@ public class Article{
              catch(SQLException e)
              {
                  
+                System.out.println( e.getMessage());
                  return e.getMessage();
+                 
                  
              }
              finally{
@@ -124,7 +126,7 @@ public class Article{
              
              
     
-    }
+        }
 
 	public void setPath(String path){
             

@@ -32,7 +32,7 @@ public class LoginGui extends javax.swing.JFrame {
        
        String Username = "root";
        String Password = "root";
-       String CON_STRING = "jdbc:mysql://localhost:3306/newspaper?useSSL=false";
+       String CON_STRING = "jdbc:mysql://localhost:3306/newspaper";
        boolean canLog = false;
        
        try{

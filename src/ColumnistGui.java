@@ -355,6 +355,7 @@ public class ColumnistGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -806,6 +807,7 @@ public class ColumnistGui extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(zeroPictures);
         zeroPictures.setText("0");
         zeroPictures.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -813,6 +815,7 @@ public class ColumnistGui extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(onePicture);
         onePicture.setText("1");
         onePicture.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -820,6 +823,7 @@ public class ColumnistGui extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(twoPictures);
         twoPictures.setText("2");
         twoPictures.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1948,6 +1952,7 @@ public class ColumnistGui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel EditPanel;
     private javax.swing.JComboBox<String> addAuthor;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField categoryField;
     private javax.swing.JTextArea descriptionField;
     private javax.swing.JPanel editPanel;
