@@ -338,7 +338,9 @@ public class LoginGui extends javax.swing.JFrame {
                     }
                    else if(isAdmin)
                    {
-                      resultText.setText("Welcome to the administrators section.");
+                      administrativeGui aGui = new administrativeGui(email);
+                       aGui.setVisible(true);
+                       this.setVisible(false);
                    
                    }
                    else if(isPublisher)
