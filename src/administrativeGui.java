@@ -491,8 +491,19 @@ public class administrativeGui extends javax.swing.JFrame {
         {
             Statement st3 = con.createStatement();
             st3.executeUpdate("Update magazine set magazinesReturned = '"+number2+"' where magazineNum = '"+selectedValue+"'and newspaperName = '"+this.newspaperName+"'");
-
+            this.initializetab1();
+            
             st3.close();
+            
+            JOptionPane.showMessageDialog(null, 
+                                       "The articles returned have been saved to the database", 
+                                        "Action perfomed", 
+                                         JOptionPane.INFORMATION_MESSAGE);
+            
+            
+            
+            
+            
         }catch(SQLException e)
         {
             System.out.println(e.getMessage());
@@ -511,15 +522,18 @@ public class administrativeGui extends javax.swing.JFrame {
         
         try
         {
-            
+                
+                if(jComboBox1.getSelectedIndex()!=-1)
+                {   
             
                  selectedValue = jComboBox1.getSelectedItem().toString();
             
-           
+               
             
                 Statement st2 = con.createStatement();
                 ResultSet se2 = st2.executeQuery("select * from magazine where newspaperName=\""+this.newspaperName+"\" and magazineNum="+selectedValue+"");
                 tableModel.setRowCount(0);
+                
                 if(se2.next())
                 {
                     nameofnewspaper = se2.getString("newspaperName");
@@ -528,6 +542,8 @@ public class administrativeGui extends javax.swing.JFrame {
                     pages = se2.getInt("pages");
                     magazinesPrinted = se2.getString("magazinesPrinted");
                 }
+                
+                
 
                 int number1 = Integer.parseInt(magazinesPrinted);
 
@@ -538,7 +554,7 @@ public class administrativeGui extends javax.swing.JFrame {
 
                     if(number2 > number1)
                     {
-                        jLabel4.setText(magazinesPrinted+" magazines have been printed !! ");
+                        jLabel4.setText(magazinesPrinted+" magazines have been printed");
                     }
                     else
                     {
@@ -559,7 +575,15 @@ public class administrativeGui extends javax.swing.JFrame {
                 }
        
 
-          
+            }else
+                {
+                      JOptionPane.showMessageDialog(null,
+                        "Please select Newspaper Issue Number",
+                        "Cannot make this action",
+                        JOptionPane.WARNING_MESSAGE);
+                    
+                    
+                }
             
         }
         catch(SQLException e)
