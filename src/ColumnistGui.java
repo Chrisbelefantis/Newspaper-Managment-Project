@@ -1178,7 +1178,7 @@ public class ColumnistGui extends javax.swing.JFrame {
                     stmt.executeUpdate("update article set state = 'rejected' where title = '"+selectedTitle+"' ");
 
                      JOptionPane.showMessageDialog(null, 
-                                       "The article has been deleted", 
+                                       "The article has been rejected", 
                                        "Article Rejected", 
                                        JOptionPane.INFORMATION_MESSAGE);
 
