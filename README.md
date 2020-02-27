@@ -13,7 +13,10 @@ every type of user as well as the entity-relationship, screenshots from runtime 
 # Runtime Screenshots
 First of all the login GUI appears and the user enters his username and password.
 
-![](/Screenshots/loginGui.png)
+
+<p align="center">
+	<img src="/Screenshots/loginGui.png" alt="Logo">
+</p>
 
 In journalist GUI here we demostrate how an he sumbits a new article. Obsiously some fields are not required.If the user
 doesn't fill the required ones an error message is displayed.
@@ -23,4 +26,3 @@ doesn't fill the required ones an error message is displayed.
 </p>
 
 
-> When path is added a file chooser window pops up but here is not captured in the reconding. 
