@@ -8,3 +8,9 @@ used neatbeans IDE and mySQL for the database. Every uses logs in with his usern
 in the database the appropriate GUI with all the available options appears. Below we present all the requirments for 
 
 every type of user as well as the entity-relationship, screenshots from runtime and instructions on how to run the project.
+
+
+# Runtime Screenshots
+First of all the login GUI appears and the user enters his username and password.
+
+![](/Screenshots/loginGui.png)
