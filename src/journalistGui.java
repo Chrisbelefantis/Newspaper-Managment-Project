@@ -254,7 +254,7 @@ public class journalistGui extends javax.swing.JFrame {
        String CON_STRING = "jdbc:mysql://localhost:3306/newspaper?useSSL=false";
      
        try{
-                con = DriverManager.getConnection(CON_STRING,Username,Password);
+                con = DriverManager.getConnection(CON_STRING,Username,null);
                 System.out.println("I am connected to database!"); 
        
        }
@@ -278,6 +278,7 @@ public class journalistGui extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -377,6 +378,16 @@ public class journalistGui extends javax.swing.JFrame {
             }
         });
 
+        jButton15.setBackground(new java.awt.Color(23, 35, 38));
+        jButton15.setForeground(new java.awt.Color(255, 255, 255));
+        jButton15.setText("Log Out");
+        jButton15.setBorder(null);
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -384,6 +395,7 @@ public class journalistGui extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -398,7 +410,9 @@ public class journalistGui extends javax.swing.JFrame {
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(46, 76, 82));
@@ -939,7 +953,7 @@ public class journalistGui extends javax.swing.JFrame {
                         .addGap(4, 4, 4))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jJournalistTabbedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(22, Short.MAX_VALUE))))
         );
 
         jJournalistTabbedPanel.getAccessibleContext().setAccessibleName("Submit New Article");
@@ -1424,6 +1438,13 @@ public class journalistGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton12ActionPerformed
 
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+
+        this.setVisible(false);
+        LoginGui lgGui = new LoginGui();
+        lgGui.setVisible(true);
+    }//GEN-LAST:event_jButton15ActionPerformed
+
     
     public static void main(String args[]) {
         
@@ -1466,6 +1487,7 @@ public class journalistGui extends javax.swing.JFrame {
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

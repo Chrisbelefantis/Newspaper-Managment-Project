@@ -50,7 +50,7 @@ public class administrativeGui extends javax.swing.JFrame {
         String CON_STRING = "jdbc:mysql://localhost:3306/newspaper?useSSL=false";
         
         try{
-                con = DriverManager.getConnection(CON_STRING,username,password);
+                con = DriverManager.getConnection(CON_STRING,username,null);
                 System.out.println("I am connected to database!"); 
         }
          catch(SQLException e)
@@ -63,8 +63,10 @@ public class administrativeGui extends javax.swing.JFrame {
         
         
          DefaultComboBoxModel dm = new DefaultComboBoxModel();
+         jLabel4.setText("");
+         jTextField2.setText("");
          
-              try{
+             try{
              Statement st1 = con.createStatement();
              ResultSet se1 = st1.executeQuery("select * from magazine where newspaperName =\""+this.newspaperName+"\"");
              
@@ -103,6 +105,7 @@ public class administrativeGui extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jProgressBar2 = new javax.swing.JProgressBar();
@@ -138,7 +141,6 @@ public class administrativeGui extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
         jButton1.setBackground(new java.awt.Color(23, 35, 38));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Magazines Returned");
         jButton1.setBorder(new javax.swing.border.MatteBorder(null));
@@ -150,7 +152,6 @@ public class administrativeGui extends javax.swing.JFrame {
         });
 
         jButton2.setBackground(new java.awt.Color(23, 35, 38));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Financial Payroll Data");
         jButton2.setBorder(new javax.swing.border.MatteBorder(null));
@@ -161,6 +162,16 @@ public class administrativeGui extends javax.swing.JFrame {
             }
         });
 
+        jButton11.setBackground(new java.awt.Color(23, 35, 38));
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
+        jButton11.setText("Log Out");
+        jButton11.setBorder(null);
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -168,6 +179,7 @@ public class administrativeGui extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
                 .addContainerGap())
@@ -179,7 +191,9 @@ public class administrativeGui extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(46, 76, 82));
@@ -361,6 +375,7 @@ public class administrativeGui extends javax.swing.JFrame {
 
         jTextField3.setBackground(new java.awt.Color(240, 240, 240));
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField3.setText("Total money per employee :");
         jTextField3.setBorder(null);
         jTextField3.setDisabledTextColor(new java.awt.Color(240, 240, 240));
@@ -368,6 +383,7 @@ public class administrativeGui extends javax.swing.JFrame {
 
         jTextField4.setBackground(new java.awt.Color(240, 240, 240));
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField4.setText("Total money for all employees:");
         jTextField4.setBorder(null);
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
@@ -381,20 +397,21 @@ public class administrativeGui extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField3)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField4)
+                        .addContainerGap())))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(76, 76, 76)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(238, 238, 238)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(262, 262, 262)
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,7 +424,7 @@ public class administrativeGui extends javax.swing.JFrame {
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(281, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -415,24 +432,22 @@ public class administrativeGui extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addGap(169, 169, 169))
+            .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(504, 504, 504)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(530, 530, 530)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5)
-                        .addGap(159, 159, 159)))
-                .addContainerGap())
+                        .addContainerGap()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,9 +457,9 @@ public class administrativeGui extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(253, 253, 253)
                 .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -470,7 +485,7 @@ public class administrativeGui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(2, 2, 2))
         );
 
         pack();
@@ -526,13 +541,11 @@ public class administrativeGui extends javax.swing.JFrame {
                 if(jComboBox1.getSelectedIndex()!=-1)
                 {   
             
-                 selectedValue = jComboBox1.getSelectedItem().toString();
-            
-               
-            
-                Statement st2 = con.createStatement();
-                ResultSet se2 = st2.executeQuery("select * from magazine where newspaperName=\""+this.newspaperName+"\" and magazineNum="+selectedValue+"");
-                tableModel.setRowCount(0);
+                   selectedValue = jComboBox1.getSelectedItem().toString();
+
+                   Statement st2 = con.createStatement();
+                   ResultSet se2 = st2.executeQuery("select * from magazine where newspaperName=\""+this.newspaperName+"\" and magazineNum="+selectedValue+"");
+                   tableModel.setRowCount(0);
                 
                 if(se2.next())
                 {
@@ -554,15 +567,18 @@ public class administrativeGui extends javax.swing.JFrame {
 
                     if(number2 > number1)
                     {
-                        jLabel4.setText(magazinesPrinted+" magazines have been printed");
+                        jLabel4.setText(magazinesPrinted+" magazines have been printed.");
                     }
                     else
                     {
+                        jLabel4.setText("See the results below.");
                         jPanel3.setVisible(true);
                         tableModel.addRow(new Object[]{nameofnewspaper,magazinenumber,publishdate,pages,magazinesPrinted,number2});
                     }
+                    
+                   
                     st2.close();
-                     se2.close();
+                    se2.close();
 
                 }
                 else
@@ -640,6 +656,14 @@ public class administrativeGui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+
+        this.setVisible(false);
+        LoginGui lgGui = new LoginGui();
+        lgGui.setVisible(true);
+
+    }//GEN-LAST:event_jButton11ActionPerformed
+
   
     
     public static void main(String args[]) {
@@ -653,6 +677,7 @@ public class administrativeGui extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

@@ -1,6 +1,7 @@
 import customPopups.*;
 import java.io.File;
 import classes.Article;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
@@ -280,7 +281,9 @@ public class ColumnistGui extends javax.swing.JFrame {
           DefaultComboBoxModel dm = new DefaultComboBoxModel(); 
           Statement st = null;
           ResultSet se = null;
-           
+          descriptionField.setText("");
+          categoryField.setText("");
+          
         try{   
             st  = con.createStatement();
             se= st.executeQuery("select categoryTitle from category");
@@ -332,7 +335,7 @@ public class ColumnistGui extends javax.swing.JFrame {
        boolean canLog = false;
        
        try{
-                con =DriverManager.getConnection(CON_STRING,Username,Password);
+                con =DriverManager.getConnection(CON_STRING,Username,null);
                 System.out.println("I am connected to database!!!"); 
        
        }
@@ -341,6 +344,8 @@ public class ColumnistGui extends javax.swing.JFrame {
            System.out.println(e.getMessage());
        }    
     }
+       
+  
        
        
        
@@ -364,6 +369,7 @@ public class ColumnistGui extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jButton13 = new javax.swing.JButton();
@@ -501,6 +507,16 @@ public class ColumnistGui extends javax.swing.JFrame {
             }
         });
 
+        jButton11.setBackground(new java.awt.Color(23, 35, 38));
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
+        jButton11.setText("Log Out");
+        jButton11.setBorder(null);
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -508,6 +524,7 @@ public class ColumnistGui extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -517,14 +534,16 @@ public class ColumnistGui extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(49, 49, 49)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(27, 27, 27)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1879,7 +1898,7 @@ public class ColumnistGui extends javax.swing.JFrame {
             }
             
             
-
+           
             
         
         }catch(SQLException e){
@@ -1913,6 +1932,15 @@ public class ColumnistGui extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_saveButtomActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+       
+        this.setVisible(false);
+        LoginGui lgGui = new LoginGui();
+        lgGui.setVisible(true);
+        
+       
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1958,6 +1986,7 @@ public class ColumnistGui extends javax.swing.JFrame {
     private javax.swing.JPanel editPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;

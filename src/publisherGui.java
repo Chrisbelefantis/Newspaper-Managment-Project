@@ -229,7 +229,7 @@ public class publisherGui extends javax.swing.JFrame {
        boolean canLog = false;
        
        try{
-                con = DriverManager.getConnection(CON_STRING,Username,Password);
+                con = DriverManager.getConnection(CON_STRING,Username,null);
                 System.out.println("I am connected to database!!!"); 
        
        }
@@ -254,6 +254,7 @@ public class publisherGui extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel7 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -390,6 +391,16 @@ public class publisherGui extends javax.swing.JFrame {
             }
         });
 
+        jButton15.setBackground(new java.awt.Color(23, 35, 38));
+        jButton15.setForeground(new java.awt.Color(255, 255, 255));
+        jButton15.setText("Log Out");
+        jButton15.setBorder(null);
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -397,6 +408,7 @@ public class publisherGui extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -414,7 +426,9 @@ public class publisherGui extends javax.swing.JFrame {
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1324,6 +1338,13 @@ public class publisherGui extends javax.swing.JFrame {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+
+        this.setVisible(false);
+        LoginGui lgGui = new LoginGui();
+        lgGui.setVisible(true);
+    }//GEN-LAST:event_jButton15ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1373,6 +1394,7 @@ public class publisherGui extends javax.swing.JFrame {
     private javax.swing.JLabel editorsName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

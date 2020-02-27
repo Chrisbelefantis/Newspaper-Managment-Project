@@ -32,11 +32,11 @@ public class LoginGui extends javax.swing.JFrame {
        
        String Username = "root";
        String Password = "root";
-       String CON_STRING = "jdbc:mysql://localhost:3306/newspaper";
+       String CON_STRING = "jdbc:mysql://localhost:3306/newspaper?useSSL=false";
        boolean canLog = false;
        
        try{
-                con = DriverManager.getConnection(CON_STRING,Username,Password);
+                con = DriverManager.getConnection(CON_STRING,Username,null);
                 System.out.println("I am connected to database!"); 
        
        }
@@ -254,9 +254,7 @@ public class LoginGui extends javax.swing.JFrame {
        }
        catch(SQLException e)
        {
-             System.out.println("Errorr1!!");
-           String error =e.toString();     
-           System.out.println(error);
+             System.out.println(e.getMessage());
        }
        
         System.exit(0);
