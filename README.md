@@ -11,13 +11,13 @@ every type of user as well as the entity-relationship, screenshots from runtime 
 
 
 # Runtime Screenshots
-**First of all the login GUI appears and the user enters his username and password.**
+First of all the login GUI appears and the user enters his username and password.
 
 ![](/Screenshots/loginGui.png)
 
-**In journalist GUI here we demostrate how an he sumbits a new article. Obsiously some fields are not required.If the user
-doesn't fill the required ones an error message is displayed.**
+In journalist GUI here we demostrate how an he sumbits a new article. Obsiously some fields are not required.If the user
+doesn't fill the required ones an error message is displayed.
 
-![](/Screenshots/Journalist.gif)
+     ![](/Screenshots/Journalist.gif)
 
 > When path is added a file chooser window pops up but here is not captured in the reconding. 
