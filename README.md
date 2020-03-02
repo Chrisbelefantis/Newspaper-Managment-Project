@@ -5,9 +5,7 @@ consists from different  users such as Journalists, Editors, Administrators, and
 
 used neatbeans IDE and mySQL for the database. Every user logs in with his username and password. If he is registered 
 
-in the database the appropriate GUI with all the available options appears. Below we present all the requirments for 
-
-every type of user as well as the entity-relationship, screenshots from runtime and instructions on how to run the project.
+in the database the appropriate GUI with all the available options appears. 
 
 
 # Runtime Screenshots
@@ -59,5 +57,13 @@ In the **second tab** the editor in chief can change the order of the articles i
 In the **Third and forth tab** he can also submit an new article which will automatically be accepted from an SQL trigger and can add
 a new category.
 
-> **Also the project has a publisher and an administrator gui**
+
+> Also the project has a publisher and an administrator gui
+
+# Entity Relationship Diagram
+
+<p align="center">
+	<img src="/Screenshots/Entity-RelationDiagram.png"  width="850" height="500">
+</p>
+
 
