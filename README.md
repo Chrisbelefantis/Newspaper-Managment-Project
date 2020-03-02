@@ -11,7 +11,7 @@ every type of user as well as the entity-relationship, screenshots from runtime 
 
 
 # Runtime Screenshots
-### Login
+## Login
 First of all the **Login GUI** appears and the user enters his username and password.
 
 
@@ -19,7 +19,7 @@ First of all the **Login GUI** appears and the user enters his username and pass
 	<img src="/Screenshots/loginGui.png" width="600" height="350">
 </p>
 
-### Journalist
+## Journalist
 In the **first tab** he can submit new article. Obsiously some fields are not required.If the user
 doesn't fill the required ones an error message is displayed.
 
@@ -42,7 +42,7 @@ The journalist selects one article and for each change he wants to do the approp
 	<img src="/Screenshots/JournalistTab3.png"  width="600" height="350">
 </p>
 
-### Editor in Chief
+## Editor in Chief
 In the **first tab** he can accept and reject articles with or without comments. In order for an article to be accepted there should
 be enough space if not an error message is displayed. When an article is accepted an SQL trigger sets the position of the article. 
 
@@ -55,4 +55,9 @@ In the **second tab** the editor in chief can change the order of the articles i
 <p align="center">
 	<img src="/Screenshots/EditorInChiefTab2.png"  width="600" height="350">
 </p>
+
+In the **Third and forth tab** he can also submit an new article which will automatically be accepted from an SQL trigger and can add
+a new category.
+
+> **Also the project has a publisher and an administrator gui**
 
